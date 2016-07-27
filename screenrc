@@ -1,0 +1,64 @@
+startup_message off                                                                                                                                                                                      
+#termcapinfo xterm*|Eterm|mlterm|rxvt 'hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007'                                                                                                                           
+termcapinfo rxvt-unicode ti@:te@     #enable SHIFT-PGUP / SHIFT-PGDOWN scroll                                                                                                                            
+#termcapinfo wy* CS=\E[?1h:CE=\E[?1l:vi=\E[?25l:ve=\E[?25h:VR=\E[?5h:VN=\E[?5l:cb=\E[1K:CD=\E[1J                                                                                                         
+#terminfo rxvt-unicode ti@:te@:                                                                                                                                                                          
+term screen-256color                                                                                                                                                                                     
+setenv LC_CTYPE en_US.UTF-8                                                                                                                                                                              
+                                                                                                                                                                                                         
+# Enable alternate screen support                                                                                                                                                                        
+altscreen on                                                                                                                                                                                             
+                                                                                                                                                                                                         
+defutf8 on                                                                                                                                                                                               
+setenv DISPLAY ':0'                                                                                                                                                                                      
+nonblock on                                                                                                                                                                                              
+vbell off                                                                                                                                                                                                
+msgwait 10                                                                                                                                                                                               
+shell -$SHELL                                                                                                                                                                                            
+                                                                                                                                                                                                         
+screen    -t bash   1                                                                                                                                                                                    
+screen    -t bash   2                                                                                                                                                                                    
+screen    -t bash   3                                                                                                                                                                                    
+screen    -t bash   4                                                                                                                                                                                    
+screen    -t bash   5                                                                                                                                                                                    
+screen    -t bash   6                                                                                                                                                                                    
+screen    -t bash   7                                                                                                                                                                                    
+screen    -t bash   8                                                                                                                                                                                    
+screen    -t bash   9                                                                                                                                                                                    
+                                                                                                                                                                                                         
+select 1                                                                                                                                                                                                 
+                                                                                                                                                                                                         
+bind = resize =                                                                                                                                                                                          
+bind + resize +1                                                                                                                                                                                         
+bind - resize -1                                                                                                                                                                                         
+bind _ resize max                                                                                                                                                                                        
+bind c screen 2 # Window numbering starts at 1, not 0.                                                                                                                                                   
+#bind 0 select 10                                                                                                                                                                                        
+# make life easier, f1-f10 selects screens 0-9                                                                                                                                                           
+bindkey -k k2 select 1                                                                                                                                                                                   
+bindkey -k k2 select 2                                                                                                                                                                                   
+bindkey -k k3 select 3                                                                                                                                                                                   
+bindkey -k k4 select 4                                                                                                                                                                                   
+bindkey -k k5 select 5                                                                                                                                                                                   
+bindkey -k k6 select 6                                                                                                                                                                                   
+bindkey -k k7 select 7                                                                                                                                                                                   
+bindkey -k k8 select 8                                                                                                                                                                                   
+bindkey -k k9 select 9                                                                                                                                                                                   
+                                                                                                                                                                                                         
+bindkey -k k; title                                                                                                                                                                                      
+                                                                                                                                                                                                         
+bind 'q' quit                                                                                                                                                                                            
+                                                                                                                                                                                              
+# add CPU idle/sustem/user/interrupt stats                                                                                                                                                               
+#backtick 100 5 5 tail -1 /var/tmp/vermaden-stats-top                                                                                                                                                    
+#caption always '%{= wk} %= %100` %='                                                                                                                                                                    
+                                                                                                                                                                                                         
+# An alternative hardstatus to display a bar at the bottom listing the                                                                                                                                   
+# windownames and highlighting the current windowname in blue. (This is only                                                                                                                             
+# enabled if there is no hardstatus setting for your terminal)                                                                                                                                           
+hardstatus on                                                                                                                                                                                            
+hardstatus alwayslastline                                                                                                                                                                                
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}]%{=b C}[ %Y/%m/%d %c:%s%{g}]%{W}'                                                          
+sorendition kw                                                                                                                                                                                           
+                                                                                                                                                                                                         
+hardcopydir ~/.screen                                     
