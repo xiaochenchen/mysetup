@@ -153,6 +153,8 @@ let NERDTreeWinPos="left"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
+" Set hotkey to toggle line number on/off.
+nmap <F2> :set invnumber<CR>
 " Set hotkey to toggle paste mode.
 set pastetoggle=<F3>
 
