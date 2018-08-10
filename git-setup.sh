@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # username and email
-git config --global user.name "Xiaochen Chen"
-git config --global user.email "xiaochenchen.git@gmail.com"
+git config --global user.name "XC Chen"
+git config --global user.email "xcc.engineer@gmail.com"
 
 # core editor
 git config --global core.editor vim
