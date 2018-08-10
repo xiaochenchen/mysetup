@@ -1,0 +1,185 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" Leader
+let mapleader = ","
+
+set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set ruler         " show the cursor position all the time
+"set fileencodings=utf-8,gb18030,gbk,big5
+
+" Softtabs, 2 spaces
+set tabstop=2
+set shiftwidth=2
+set shiftround
+set expandtab
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+" call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Molokai color scheme for Vim
+Plugin 'tomasr/molokai'
+" Badwolf color scheme for Vim
+Plugin 'sjl/badwolf'
+
+" A tree explorer plugin for Vim
+Plugin 'scrooloose/nerdtree'
+
+" CtrlP - Fuzzy file, buffer, mru, tag, etc finder.
+Plugin 'kien/ctrlp.vim'
+
+" Lean & mean status/tabline for vim that's light as air.
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" A code-completion engine for Vim
+"Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'tpope/vim-surround'
+
+Plugin 'scrooloose/nerdcommenter'
+
+" Syntax checking hacks for vim
+Plugin 'scrooloose/syntastic'
+
+"Plugin 'Shougo/vimproc.vim'
+" Run interactive commands inside a vim buffer
+"Plugin 'Shougo/vimshell.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+endif
+
+" Color scheme
+"colorscheme badwolf
+"let g:badwolf_darkgutter = 1
+
+colorscheme molokai
+let g:molokai_original = 1
+let g:rehash256 = 1
+:hi CursorLine term=bold cterm=bold,reverse ctermbg=0 ctermfg=6 guibg=LightGray
+:hi CursorColumn term=bold cterm=bold,reverse ctermbg=0 ctermfg=6 guibg=LightGrey
+
+" Make it obvious where 80 characters is
+set textwidth=80
+set colorcolumn=+1
+
+" Highlight current line
+"au WinLeave * set nocursorline nocursorcolumn
+"au WinEnter * set cursorline cursorcolumn
+set cursorline
+
+" Numbers
+set number
+set numberwidth=5
+
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Ctrlp
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_match_window = 'min:1,max:20,results:20'
+let g:ctrlp_max_files = 0
+let g:ctrlp_max_depth = 100
+:hi CtrlPLinePre term=bold cterm=bold ctermbg=0 ctermfg=2 guibg=LightGrey
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+autocmd vimenter * if !argc() | NERDTree | endif " Automatically open a NERDTree if no files where specified
+" Close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDChristmasTree=0
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowBookmarks=1
+let NERDTreeWinPos="left"
+
+" vim-aireline
+"let g:airline_theme="luna" 
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+" Set hotkey to toggle line number on/off.
+nmap <F2> :set invnumber<CR>
+" Set hotkey to toggle paste mode.
+set pastetoggle=<F3>
+
+" YouCompleteMe Project configration file
+"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Open VimShell in a new tab.
+"nnoremap <Space>aa :<C-u>tabnew<CR>:pwd<Cr>:VimShell<Cr>
+"nnoremap <Space>av  :<C-u>tabnew<CR>:cd ~/.vimbundles<Cr>:VimShell<Cr>
+"nnoremap <Space>an  :<C-u>tabnew<CR>:cd ~/<Cr>:VimShell<Cr>
+"nmap <Space>v <Plug>(vimshell_split_switch)
+
+" Closes VimShell from anywhere
+"nnoremap <space>V :<C-u>VimShellClose<Cr>
+
+"let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+"let g:vimshell_prompt =  '$ '
+"let g:vimshell_split_command = 'split'
+"let g:vimshell_scrollback_limit = 4000
+"let g:vimshell_interactive_update_time = 400
+"let g:vimshell_max_command_history = 100000 " default is 1000
+
+"let g:vimshell_escape_colors = [
+      "\'#3c3c3c', '#ff6666', '#66ff66', '#ffd30a', '#1e95fd', '#ff13ff', '#1bc8c8', '#C0C0C0',
+      "\'#686868', '#ff6666', '#66ff66', '#ffd30a', '#6699ff', '#f820ff', '#4ae2e2', '#ffffff'
+      "\]
